@@ -2,7 +2,7 @@
 // Configuration and Constants
 const CONFIG = {
     // Replace with your Google Sheets published CSV URL
-    GOOGLE_SHEETS_URL: 'YOUR_PUBLISHED_CSV_URL_HERE',
+    GOOGLE_SHEETS_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTR57GyQwEa-SSoSH2bTX64hty8_iw1IJrp0zjMg8xveCQmFDPtPGq9BIL8Jhnx6wOA5z_QLlGZ7pBe/pub?gid=1248584073&single=true&output=csv',
     
     // Competency mappings based on your sheet structure
     COMPETENCY_MAPPINGS: {
