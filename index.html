@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quarterly Manager Feedback Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="dashboard-header">
+            <h1>Quarterly Manager Feedback Dashboard</h1>
+            <div class="header-controls">
+                <label for="periodSelect">Assessment Period:</label>
+                <select id="periodSelect"></select>
+                <label for="managerSelect">Select Manager:</label>
+                <select id="managerSelect"></select>
+            </div>
+        </header>
+
+        <main>
+            <section id="overview" class="card">
+                <h2>Current Period Metrics</h2>
+                <div id="metrics">
+                    <div>Total Responses: <span id="totalResponses"></span></div>
+                    <div>Overall Effectiveness: <span id="overallEffectiveness"></span></div>
+                    <div>Recommendation: <span id="recommendationScore"></span></div>
+                    <div>Success Confidence: <span id="successConfidence"></span></div>
+                    <div>Improvement Perception: <span id="improvementPerception"></span></div>
+                </div>
+                <h3>Historical Comparison</h3>
+                <div id="historicalComparison">
+                    <div>Previous Period Score: <span id="prevPeriodScore"></span></div>
+                    <div>Quarter Change: <span id="quarterChange"></span></div>
+                    <div>Change Description: <span id="changeDescription"></span></div>
+                    <div>Cumulative Score: <span id="cumulativeScore"></span></div>
+                    <div>Latest vs Cumulative: <span id="latestVsCumulative"></span></div>
+                </div>
+            </section>
+
+            <section id="competencies" class="card">
+                <h2>Competency Breakdown</h2>
+                <div id="competencyBars"></div>
+                <canvas id="competencyRadar" width="400" height="400"></canvas>
+            </section>
+
+            <section id="responseDistribution" class="card">
+                <h2>Response Distribution</h2>
+                <canvas id="distributionBarChart" width="600" height="300"></canvas>
+            </section>
+
+            <section id="developmentFocus" class="card">
+                <h2>Development Focus Areas</h2>
+                <ul id="devFocusList"></ul>
+            </section>
+
+            <section id="comparison" class="card">
+                <h2>Manager Comparison</h2>
+                <table id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th>Manager</th>
+                            <th>Overall Score</th>
+                            <th>Communication</th>
+                            <th>Problem Solving</th>
+                            <th>Field Presence</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
