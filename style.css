@@ -1,0 +1,132 @@
+:root {
+    --color-bg: #fefefa;
+    --color-primary: #21808d;
+    --color-primary-light: #29a4b3;
+    --color-text: #13343b;
+    --color-surface: #fff;
+    --color-muted: #67787a;
+    --color-accent: #ea4c89;
+    --color-green-light: #90ee90;
+    --color-orange-light: #ffe8b8;
+    --color-red-light: #ffb5b5;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.dashboard-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+    font-weight: 700;
+    color: var(--color-primary);
+    flex-grow: 1;
+    margin: 0 10px 10px 0;
+}
+
+.header-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+label {
+    font-weight: 600;
+}
+
+select {
+    padding: 5px 8px;
+    border: 1px solid var(--color-muted);
+    border-radius: 4px;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.card {
+    background-color: var(--color-surface);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+#metrics div,
+#historicalComparison div {
+    margin-bottom: 6px;
+}
+
+#competencyBars > div {
+    margin-bottom: 12px;
+}
+
+.competency-bar {
+    background-color: var(--color-orange-light);
+    border-radius: 20px;
+    height: 25px;
+    width: 100%;
+    position: relative;
+}
+
+.competency-fill {
+    height: 100%;
+    border-radius: 20px 0 0 20px;
+    background-color: var(--color-primary-light);
+    transition: width 0.5s ease-in-out;
+    text-align: right;
+    line-height: 25px;
+    color: #fff;
+    padding-right: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+#comparisonTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#comparisonTable th,
+#comparisonTable td {
+    border: 1px solid var(--color-muted);
+    padding: 8px;
+    text-align: center;
+}
+
+#comparisonTable th {
+    background-color: var(--color-primary-light);
+    color: white;
+}
+
+#devFocusList {
+    list-style-type: disc;
+    margin-left: 1em;
+}
+
+h2 {
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
