@@ -1,3 +1,10 @@
+fetch('GOOGLE_SHEET_PUBLISHED_CSV_URL')
+  .then(response => response.text())
+  .then(csvText => {
+    const data = Papa.parse(csvText, { header: true }).data;
+    processData(data);
+  })
+  .catch(error => console.error('Error loading sheet data:', error));
 // Sample quarterly manager data (You should replace this with your real CSV loaded data)
 const dashboardData = {
     assessment_periods: ["Q1-2024", "Q2-2024", "Q3-2024", "Q4-2024", "Q1-2025"],
