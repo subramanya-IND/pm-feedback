@@ -2,7 +2,7 @@
 // Configuration and Constants
 const CONFIG = {
     // Replace with your Google Sheets published CSV URL
-    GOOGLE_SHEETS_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTR57GyQwEa-SSoSH2bTX64hty8_iw1IJrp0zjMg8xveCQmFDPtPGq9BIL8Jhnx6wOA5z_QLlGZ7pBe/pub?gid=1248584073&single=true&output=csv',
+    GOOGLE_SHEETS_URL: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxiI0tQx98bOCJL8y-HsYlXvJY_cr9ISI9sqvx7j8064hfRQ3TkyeQlLBLH3FLZDK8f_32zT3IMYM/pub?gid=1591627104&single=true&output=csv',
     
     // Competency mappings based on your sheet structure
     COMPETENCY_MAPPINGS: {
@@ -886,7 +886,7 @@ function exportReport() {
 // Initialize the dashboard when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     // Add notice about configuration if URL not set
-    if (CONFIG.GOOGLE_SHEETS_URL === 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTR57GyQwEa-SSoSH2bTX64hty8_iw1IJrp0zjMg8xveCQmFDPtPGq9BIL8Jhnx6wOA5z_QLlGZ7pBe/pub?gid=1248584073&single=true&output=csv') {
+    if (CONFIG.GOOGLE_SHEETS_URL === 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTVxiI0tQx98bOCJL8y-HsYlXvJY_cr9ISI9sqvx7j8064hfRQ3TkyeQlLBLH3FLZDK8f_32zT3IMYM/pub?gid=1591627104&single=true&output=csv') {
         const notice = document.createElement('div');
         notice.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: #f59e0b; color: white; padding: 10px; text-align: center; z-index: 1001;';
         notice.innerHTML = '<strong>Configuration Required:</strong> Please update the GOOGLE_SHEETS_URL in dashboard.js with your published Google Sheets CSV URL.';
