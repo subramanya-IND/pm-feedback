@@ -1,4 +1,4 @@
-fetch('GOOGLE_SHEET_PUBLISHED_CSV_URL')
+fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vTR57GyQwEa-SSoSH2bTX64hty8_iw1IJrp0zjMg8xveCQmFDPtPGq9BIL8Jhnx6wOA5z_QLlGZ7pBe/pubhtml?gid=1248584073&single=true')
   .then(response => response.text())
   .then(csvText => {
     const data = Papa.parse(csvText, { header: true }).data;
