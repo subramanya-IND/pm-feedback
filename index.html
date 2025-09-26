@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avanti Fellows - Manager Feedback Dashboard AY 2024-25</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- External libraries -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manager Feedback Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.2/papaparse.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Header -->
         <header class="dashboard-header">
             <div class="header-content">
                 <div class="brand-section">
-                    <img src="logo.png" alt="Avanti Fellows" class="brand-logo">
+                    <img src="your-company-logo.png" alt="Your Company Logo" class="brand-logo">
                     <div class="brand-text">
                         <h1>Manager Feedback Dashboard</h1>
                         <p>Academic Year 2024-25</p>
@@ -27,297 +23,60 @@
                 <div class="header-controls">
                     <div class="control-group">
                         <label for="periodSelect"><i class="fas fa-calendar"></i> Assessment Period</label>
-                        <select id="periodSelect" class="form-select">
-                            <option value="">Loading...</option>
-                        </select>
+                        <select id="periodSelect" class="form-select"></select>
                     </div>
-                    <div class="control-group">
-                        <label for="managerSelect"><i class="fas fa-user-tie"></i> Manager</label>
-                        <select id="managerSelect" class="form-select">
-                            <option value="">All Managers</option>
-                        </select>
-                    </div>
-                    <button id="exportBtn" class="btn btn-export">
-                        <i class="fas fa-download"></i> Export Report
-                    </button>
                 </div>
             </div>
         </header>
 
-        <!-- Main Content -->
         <div class="tab-header">
-  <button class="tab-btn active" id="tabIndividualBtn">Individual Manager</button>
-  <button class="tab-btn" id="tabComparisonBtn">Manager Comparison</button>
-</div>
+            <button class="tab-btn active" id="tabIndividualBtn">Individual Manager</button>
+            <button class="tab-btn" id="tabComparisonBtn">Manager Comparison</button>
+        </div>
 
-<div class="tab-content" id="tabIndividual" style="display:block">
-  <!-- All existing individual manager sections go here -->
-  <!-- Metrics, Manager Performance, Radar, etc. -->
-</div>
-
-<div class="tab-content" id="tabComparison" style="display:none">
-  <div class="comparison-controls">
-    <label for="multiManagerSelect">Compare Managers:</label>
-    <select id="multiManagerSelect" multiple>
-      <!-- JS populates options -->
-    </select>
-    <button class="btn" id="compareBtn">Compare</button>
-  </div>
-  <div class="comparison-output">
-    <!-- Table and Bar Chart render here -->
-    <div class="comparison-table-card">
-      <table id="comparisonTable">
-        <!-- Same as your current manager comparison table -->
-      </table>
-    </div>
-    <canvas id="managersBarChart" height="350"></canvas>
-  </div>
-</div>
-        <main class="dashboard-main">
-            <!-- Key Metrics Overview -->
-            <section class="metrics-overview">
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-users"></i>
+        <main>
+            <div class="tab-content" id="tabIndividual" style="display: block;">
+                <!-- Individual Manager Section -->
+                <div id="manager-section">
+                  <div class="metric-card-group">
+                    <div class="metric-card">
+                      <div class="metric-label">Total Responses</div>
+                      <div class="metric-value" id="managerResponses">--</div>
                     </div>
-                    <div class="metric-content">
-                        <h3>Total Responses</h3>
-                        <div class="metric-value" id="totalResponses">0</div>
-                        <div class="metric-change" id="responseChange">--</div>
+                    <div class="metric-card">
+                      <div class="metric-label">Overall Score</div>
+                      <div class="metric-value" id="overallScore">--</div>
                     </div>
+                  </div>
+                  <div id="competencyBars"></div>
+                  <div>
+                    <canvas id="competencyRadar" width="400" height="300"></canvas>
+                  </div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="metric-content">
-                        <h3>Average Effectiveness</h3>
-                        <div class="metric-value" id="avgEffectiveness">0.0</div>
-                        <div class="metric-change" id="effectivenessChange">--</div>
-                    </div>
+            </div>
+
+            <div class="tab-content" id="tabComparison" style="display: none;">
+                <div class="comparison-controls">
+                    <label for="multiManagerSelect">Compare Managers:</label>
+                    <select id="multiManagerSelect" multiple></select>
+                    <button class="btn" id="compareBtn">Compare</button>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <div class="metric-content">
-                        <h3>Top Performer</h3>
-                        <div class="metric-value" id="topPerformer">--</div>
-                        <div class="metric-change" id="topPerformerScore">--</div>
-                    </div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="metric-content">
-                        <h3>Improvement Rate</h3>
-                        <div class="metric-value" id="improvementRate">0%</div>
-                        <div class="metric-change" id="improvementChange">--</div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Dashboard Content -->
-            <div class="dashboard-content">
-                <!-- Left Column -->
-                <div class="left-column">
-                    <!-- Manager Performance Card -->
-                    <div class="card manager-performance">
-                        <div class="card-header">
-                            <h2><i class="fas fa-user-check"></i> Manager Performance</h2>
-                            <div class="card-actions">
-                                <button class="btn-icon" id="refreshData">
-                                    <i class="fas fa-sync-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div id="managerDetails" class="manager-details">
-                                <div class="manager-info">
-                                    <h3 id="selectedManagerName">All Managers Overview</h3>
-                                    <div class="manager-stats">
-                                        <div class="stat-item">
-                                            <span class="stat-label">Period:</span>
-                                            <span class="stat-value" id="currentPeriod">--</span>
-                                        </div>
-                                        <div class="stat-item">
-                                            <span class="stat-label">Responses:</span>
-                                            <span class="stat-value" id="managerResponses">--</span>
-                                        </div>
-                                        <div class="stat-item">
-                                            <span class="stat-label">Overall Score:</span>
-                                            <span class="stat-value" id="overallScore">--</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Competency Breakdown -->
-                            <div class="competency-section">
-                                <h4>Competency Breakdown</h4>
-                                <div id="competencyBars" class="competency-bars">
-                                    <!-- Dynamic content -->
-                                </div>
-                            </div>
-
-                            <!-- Historical Comparison -->
-                            <div class="historical-section" id="historicalSection">
-                                <h4>Historical Comparison</h4>
-                                <div class="comparison-grid">
-                                    <div class="comparison-item">
-                                        <span class="comparison-label">Previous Period:</span>
-                                        <span class="comparison-value" id="prevPeriodScore">--</span>
-                                    </div>
-                                    <div class="comparison-item">
-                                        <span class="comparison-label">Change:</span>
-                                        <span class="comparison-value" id="periodChange">--</span>
-                                    </div>
-                                    <div class="comparison-item">
-                                        <span class="comparison-label">Cumulative:</span>
-                                        <span class="comparison-value" id="cumulativeScore">--</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Development Focus Card -->
-                    <div class="card development-focus">
-                        <div class="card-header">
-                            <h2><i class="fas fa-bullseye"></i> Development Focus</h2>
-                        </div>
-                        <div class="card-content">
-                            <div id="developmentAreas" class="development-areas">
-                                <div class="focus-area">
-                                    <div class="focus-icon">📈</div>
-                                    <div class="focus-content">
-                                        <h4>Top Priority Areas</h4>
-                                        <ul id="topPriorityList">
-                                            <li>Loading...</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="focus-area">
-                                    <div class="focus-icon">⚡</div>
-                                    <div class="focus-content">
-                                        <h4>Quick Wins</h4>
-                                        <ul id="quickWinsList">
-                                            <li>Loading...</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="right-column">
-                    <!-- Visualization Card -->
-                    <div class="card visualization">
-                        <div class="card-header">
-                            <h2><i class="fas fa-chart-radar"></i> Competency Radar</h2>
-                            <div class="chart-controls">
-                                <button class="btn btn-sm" id="toggleCumulative">Show Cumulative</button>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="chart-container">
-                                <canvas id="competencyRadar" width="400" height="400"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Trends Card -->
-                    <div class="card trends">
-                        <div class="card-header">
-                            <h2><i class="fas fa-chart-line"></i> Performance Trends</h2>
-                        </div>
-                        <div class="card-content">
-                            <div class="chart-container">
-                                <canvas id="trendsChart" width="400" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Full Width Sections -->
-                <div class="full-width">
-                    <!-- Manager Comparison Table -->
-                    <div class="card comparison-table">
-                        <div class="card-header">
-                            <h2><i class="fas fa-balance-scale"></i> Manager Comparison</h2>
-                            <div class="table-controls">
-                                <input type="text" id="searchManagers" placeholder="Search managers..." class="search-input">
-                                <select id="sortBy" class="form-select">
-                                    <option value="overall">Sort by Overall Score</option>
-                                    <option value="communication">Sort by Communication</option>
-                                    <option value="problem_solving">Sort by Problem Solving</option>
-                                    <option value="field_presence">Sort by Field Presence</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="card-content">
-                            <div class="table-wrapper">
-                                <table id="comparisonTable" class="comparison-table-element">
-                                    <thead>
-                                        <tr>
-                                            <th class="manager-col">Manager</th>
-                                            <th class="score-col">Overall</th>
-                                            <th class="score-col">Communication</th>
-                                            <th class="score-col">Problem Solving</th>
-                                            <th class="score-col">Field Presence</th>
-                                            <th class="score-col">Performance Mgmt</th>
-                                            <th class="score-col">Leadership</th>
-                                            <th class="score-col">Follow Through</th>
-                                            <th class="score-col">Strategic Thinking</th>
-                                            <th class="responses-col">Responses</th>
-                                            <th class="rank-col">Rank</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="comparisonTableBody">
-                                        <!-- Dynamic content -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Response Distribution -->
-                    <div class="card response-distribution">
-                        <div class="card-header">
-                            <h2><i class="fas fa-chart-bar"></i> Response Distribution</h2>
-                        </div>
-                        <div class="card-content">
-                            <div class="chart-container">
-                                <canvas id="distributionChart" width="800" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                <div class="comparison-output">
+                    <table id="comparisonTable"></table>
+                    <canvas id="managersBarChart" height="350"></canvas>
                 </div>
             </div>
         </main>
 
-        <!-- Loading Overlay -->
-        <div id="loadingOverlay" class="loading-overlay">
-            <div class="loading-spinner">
-                <div class="spinner"></div>
-                <p>Loading dashboard data...</p>
-            </div>
+        <div id="loadingOverlay" class="loading-overlay hidden">
+          <div class="spinner"></div>
+          <span>Loading...</span>
         </div>
 
-        <!-- Error Message -->
         <div id="errorMessage" class="error-message hidden">
-            <div class="error-content">
-                <i class="fas fa-exclamation-triangle"></i>
-                <h3>Unable to Load Data</h3>
-                <p>Please check your Google Sheets URL and try again.</p>
-                <button id="retryBtn" class="btn btn-primary">Retry</button>
-            </div>
+          <span>Error loading data. Please check your Google Sheet URL and config.</span>
         </div>
     </div>
-
     <script src="dashboard.js"></script>
 </body>
 </html>
