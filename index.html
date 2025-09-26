@@ -45,6 +45,34 @@
         </header>
 
         <!-- Main Content -->
+        <div class="tab-header">
+  <button class="tab-btn active" id="tabIndividualBtn">Individual Manager</button>
+  <button class="tab-btn" id="tabComparisonBtn">Manager Comparison</button>
+</div>
+
+<div class="tab-content" id="tabIndividual" style="display:block">
+  <!-- All existing individual manager sections go here -->
+  <!-- Metrics, Manager Performance, Radar, etc. -->
+</div>
+
+<div class="tab-content" id="tabComparison" style="display:none">
+  <div class="comparison-controls">
+    <label for="multiManagerSelect">Compare Managers:</label>
+    <select id="multiManagerSelect" multiple>
+      <!-- JS populates options -->
+    </select>
+    <button class="btn" id="compareBtn">Compare</button>
+  </div>
+  <div class="comparison-output">
+    <!-- Table and Bar Chart render here -->
+    <div class="comparison-table-card">
+      <table id="comparisonTable">
+        <!-- Same as your current manager comparison table -->
+      </table>
+    </div>
+    <canvas id="managersBarChart" height="350"></canvas>
+  </div>
+</div>
         <main class="dashboard-main">
             <!-- Key Metrics Overview -->
             <section class="metrics-overview">
